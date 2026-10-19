@@ -9,8 +9,11 @@
 
 ## 上线前三件事（都在你账号里，各 5 分钟）
 
-1. **表单端点**：Formspree（formspree.io，免费档 50 条/月）或 Tally 建一个表单，字段 `email`、`intent`、`product`、`page`、`ref`。把端点 URL 填进两页 `<script>window.FORM_ENDPOINT = "";</script>`。
-   Formspree 例：`https://formspree.io/f/xxxxxxxx`。
+1. **表单端点**：已接 Google 表单「Early access」（账号 ghostooydq@gmail.com），后台看回复：
+   https://docs.google.com/forms/d/1_xIhHyUWw_PjbKy-9UwuY12RBvqGgk8p755_OgHafSQ/edit#responses
+   页面用 no-cors POST 到 formResponse，四个 entry ID 已写在两页 `window.FORM_FIELDS`，2026-10-19 真实提交验证通过。
+   注意：若在表单里改题目类型，entry ID 可能变，用 `python3 -c` 重新解析 viewform 的 FB_PUBLIC_LOAD_DATA_。
+   2026-10-19 的 3 条测试数据（selftest/pytest/pagetest@example.com）统计时要剔除。
 2. **访问统计**：Cloudflare Dashboard → Web Analytics → Add a site（你的 Cloudflare 账号已有）→ 复制 beacon `<script>` 粘到两页末尾注释处。免费、无 cookie。
 3. **发布**：
    ```bash
