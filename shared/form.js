@@ -1,8 +1,10 @@
 /* Fake-door form: records intent (preorder | waitlist) + email.
- * Set FORM_ENDPOINT to a Formspree / Tally / Basin endpoint before publishing.
+ * Posts to a Google Form (formResponse endpoint) with no-cors, so the request
+ * cannot be read back; we treat a completed fetch as saved.
  * Nothing is charged; the dialog says so. */
 (function () {
   var FORM_ENDPOINT = window.FORM_ENDPOINT || "";
+  var FIELDS = window.FORM_FIELDS || {};
   var PRODUCT = document.body.dataset.product || "unknown";
   var dlg = document.getElementById("door");
   var form = dlg.querySelector("form");
@@ -33,10 +35,13 @@
 
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
-    var data = new FormData(form);
-    data.set("product", PRODUCT);
-    data.set("page", location.pathname);
-    data.set("ref", document.referrer || "");
+    var email = form.querySelector('input[name="email"]').value.trim();
+    var src = (document.referrer || "") + " " + location.search;
+    var data = new URLSearchParams();
+    data.set(FIELDS.email || "email", email);
+    data.set(FIELDS.product || "product", PRODUCT);
+    data.set(FIELDS.intent || "intent", intentField.value);
+    data.set(FIELDS.ref || "ref", src.trim());
     if (!FORM_ENDPOINT) {
       status.className = "status err";
       status.textContent = "Form endpoint not configured yet.";
@@ -44,8 +49,8 @@
     }
     status.className = "status";
     status.textContent = "Saving…";
-    fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); })
+    fetch(FORM_ENDPOINT, { method: "POST", body: data, mode: "no-cors",
+                           headers: { "Content-Type": "application/x-www-form-urlencoded" } })
       .then(function () {
         form.hidden = true;
         status.className = "status done";
