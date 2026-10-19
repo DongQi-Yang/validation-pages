@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loud for iPhone</title>
+<meta name="description" content="Measure your video's loudness, fix it to the YouTube or TikTok target, clean the noise. One tap on iPhone, nothing uploaded, pay once.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/site.css">
+<style>
+  .cmp { display: grid; gap: 14px; }
+  .bar { display: grid; grid-template-columns: 8.5em 1fr 5.5em; gap: 12px; align-items: center; font-size: 15px; }
+  .bar .name { color: var(--ink-soft); }
+  .track { height: 18px; background: var(--rule); border-radius: 3px; position: relative; overflow: hidden; }
+  .track span { position: absolute; inset: 0; transform-origin: left; border-radius: 3px; }
+  .bar .val { text-align: right; font-variant-numeric: tabular-nums; }
+  .others .track span { background: var(--teal); transform: scaleX(.86); }
+  .you .track span { background: var(--coral); transform: scaleX(.44); animation: fix 4s ease-in-out infinite; }
+  @keyframes fix { 0%,35% { transform: scaleX(.44); background: var(--coral) } 50%,90% { transform: scaleX(.86); background: var(--teal) } 100% { transform: scaleX(.44); background: var(--coral) } }
+  .you .val { position: relative; height: 1.5em; }
+  .you .val span { position: absolute; right: 0; top: 0; }
+  .you .val span.b { opacity: 0; animation: swapB 4s ease-in-out infinite; }
+  .you .val span.a { animation: swapA 4s ease-in-out infinite; }
+  @keyframes swapB { 0%,35% { opacity: 0 } 50%,90% { opacity: 1 } 100% { opacity: 0 } }
+  @keyframes swapA { 0%,35% { opacity: 1 } 50%,90% { opacity: 0 } 100% { opacity: 1 } }
+  .cap { margin-top: 28px; font-size: 15px; color: var(--ink-soft); }
+  @media (max-width: 420px) {
+    .bar { grid-template-columns: 6.2em 1fr 5.4em; gap: 8px; font-size: 14px; }
+  }
+</style>
+</head>
+<body data-product="loud">
+<main>
+  <h1>Why is your video quieter than everyone else's?</h1>
+  <p class="lede">Measure it, fix it to the YouTube or TikTok target, clean up the noise. One tap on your iPhone. The video is untouched, only the sound changes.</p>
+
+  <div class="widget anim" aria-label="Your video's loudness compared with similar channels, then corrected to the target">
+    <div class="cmp">
+      <div class="bar others"><span class="name">Similar channels</span><div class="track"><span></span></div><span class="val">−14.0 LUFS</span></div>
+      <div class="bar you"><span class="name">Your last upload</span><div class="track"><span></span></div><span class="val"><span class="a">−23.1 LUFS</span><span class="b">−14.0 LUFS</span></span></div>
+    </div>
+    <p class="cap">YouTube turns loud videos down but never turns quiet ones up. Yours stays quiet. This fixes that before you upload.</p>
+  </div>
+
+  <div class="offer"><span class="price">$9.99<small>once</small></span></div>
+  <div class="actions">
+    <button data-intent="preorder">Pre-order for $9.99</button>
+    <button class="quiet" data-intent="waitlist">Tell me when it ships</button>
+  </div>
+
+  <h2>What it does</h2>
+  <ul class="plain">
+    <li>Reads the real loudness (LUFS and true peak) of any video or audio file in your library, and tells you how far off the platform target you are.</li>
+    <li>Fixes it: loudness to target, dialogue evened out so quiet sentences and loud laughs sit together, peaks kept legal.</li>
+    <li>Removes wind, hum and room noise from speech without turning the voice into a robot. Keeps music if you tell it to.</li>
+    <li>Writes the file back with the original video untouched. No re-encode, no quality loss, no upload.</li>
+  </ul>
+
+  <h2>Who this is for</h2>
+  <p class="who">People who shoot and cut on a phone and keep getting "can't hear you" comments. Not for people who already own iZotope RX.</p>
+
+  <footer>
+    <p>Made by an audio engineer. Not released yet. Pre-ordering locks the price and charges nothing. If you'd pay a different amount, say so in the email, that's genuinely useful.</p>
+  </footer>
+</main>
+
+<dialog id="door">
+  <h3>Pre-orders aren't open yet</h3>
+  <p></p>
+  <form>
+    <input type="hidden" name="intent" value="">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+    <div class="row">
+      <button type="submit">Save my spot</button>
+      <button type="button" class="quiet close">Not now</button>
+    </div>
+  </form>
+  <p class="status" role="status" aria-live="polite"></p>
+</dialog>
+
+<script>window.FORM_ENDPOINT = "";</script>
+<script src="../shared/form.js"></script>
+<!-- Cloudflare Web Analytics: paste the beacon snippet here before publishing -->
+</body>
+</html>

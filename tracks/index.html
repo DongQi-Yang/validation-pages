@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracks for iPhone</title>
+<meta name="description" content="Plug a USB-C interface into your iPhone and record every person to their own track. One WAV per person plus the mix. Pay once.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/site.css">
+<style>
+  .lanes { display: grid; gap: 10px; }
+  .lane { display: grid; grid-template-columns: 7.5em 1fr 3.2em; align-items: center; gap: 12px; font-size: 15px; }
+  .lane .name { color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .meter { height: 14px; background: var(--rule); border-radius: 3px; overflow: hidden; position: relative; }
+  .meter span { position: absolute; inset: 0; transform-origin: left; border-radius: 3px; }
+  .lane .db { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  .lane:nth-child(1) .meter span { background: var(--amber); animation: m1 2.6s ease-in-out infinite; }
+  .lane:nth-child(2) .meter span { background: var(--teal); animation: m2 3.1s ease-in-out infinite; }
+  .lane:nth-child(3) .meter span { background: var(--coral); animation: m3 2.2s ease-in-out infinite; }
+  .lane:nth-child(4) .meter span { background: var(--violet); animation: m4 3.5s ease-in-out infinite; }
+  @keyframes m1 { 0%,100% { transform: scaleX(.62) } 40% { transform: scaleX(.18) } 70% { transform: scaleX(.78) } }
+  @keyframes m2 { 0%,100% { transform: scaleX(.22) } 30% { transform: scaleX(.70) } 60% { transform: scaleX(.35) } }
+  @keyframes m3 { 0%,100% { transform: scaleX(.40) } 50% { transform: scaleX(.12) } 80% { transform: scaleX(.66) } }
+  @keyframes m4 { 0%,100% { transform: scaleX(.15) } 45% { transform: scaleX(.58) } 75% { transform: scaleX(.26) } }
+  .rec { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 15px; color: var(--ink-soft); }
+  .rec i { width: 10px; height: 10px; border-radius: 50%; background: var(--coral); display: inline-block; }
+  @media (max-width: 420px) {
+    .lane { grid-template-columns: 5.2em 1fr 2.6em; gap: 8px; font-size: 14px; }
+    .rec { font-size: 14px; }
+  }
+</style>
+</head>
+<body data-product="tracks">
+<main>
+  <h1>Every person on their own track.</h1>
+  <p class="lede">Plug a USB-C interface into your iPhone. Hit record. Get one WAV per person, plus the mix. Nothing uploaded, nothing to subscribe to.</p>
+
+  <div class="widget anim" aria-label="Four people recording to four separate tracks">
+    <div class="lanes">
+      <div class="lane"><span class="name">Host</span><div class="meter"><span></span></div><span class="db">−18</span></div>
+      <div class="lane"><span class="name">Guest 1</span><div class="meter"><span></span></div><span class="db">−22</span></div>
+      <div class="lane"><span class="name">Guest 2</span><div class="meter"><span></span></div><span class="db">−15</span></div>
+      <div class="lane"><span class="name">Guest 3</span><div class="meter"><span></span></div><span class="db">−27</span></div>
+    </div>
+    <div class="rec"><i></i>Recording 00:41:12 · 4 tracks · 48 kHz 32-bit float</div>
+  </div>
+
+  <div class="offer"><span class="price">$29.99<small>once</small></span></div>
+  <div class="actions">
+    <button data-intent="preorder">Pre-order for $29.99</button>
+    <button class="quiet" data-intent="waitlist">Tell me when it ships</button>
+  </div>
+
+  <h2>What you get</h2>
+  <ul class="plain">
+    <li>Any class-compliant USB-C interface, 2 to 8 inputs. Each input shows its own level meter and gets its own file.</li>
+    <li>Camera on or off. When it's on, video and all tracks stay in sync for the whole session.</li>
+    <li>Export a folder: one WAV per person and the mixed track. AirDrop it or open it in Descript, Resolve, Logic.</li>
+    <li>Runs for hours. Files are written as you go, so a dead battery costs you seconds, not the episode.</li>
+  </ul>
+
+  <h2>Who this is for</h2>
+  <p class="who">Round-table podcasts recorded in one room. Interviews on location. Musicians who want the interface and the camera in the same app.</p>
+
+  <footer>
+    <p>Made by an audio engineer who has done the "everyone records on their own phone and we clap at the start" thing too many times. Not released yet. Pre-ordering locks the price, charges nothing.</p>
+  </footer>
+</main>
+
+<dialog id="door">
+  <h3>Pre-orders aren't open yet</h3>
+  <p></p>
+  <form>
+    <input type="hidden" name="intent" value="">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+    <div class="row">
+      <button type="submit">Save my spot</button>
+      <button type="button" class="quiet close">Not now</button>
+    </div>
+  </form>
+  <p class="status" role="status" aria-live="polite"></p>
+</dialog>
+
+<script>window.FORM_ENDPOINT = "";</script>
+<script src="../shared/form.js"></script>
+<!-- Cloudflare Web Analytics: paste the beacon snippet here before publishing -->
+</body>
+</html>
