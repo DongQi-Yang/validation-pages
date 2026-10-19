@@ -14,8 +14,10 @@
    页面用 no-cors POST 到 formResponse，四个 entry ID 已写在两页 `window.FORM_FIELDS`，2026-10-19 真实提交验证通过。
    注意：若在表单里改题目类型，entry ID 可能变，用 `python3 -c` 重新解析 viewform 的 FB_PUBLIC_LOAD_DATA_。
    2026-10-19 的 3 条测试数据（selftest/pytest/pagetest@example.com）统计时要剔除。
-2. **访问统计**：Cloudflare Dashboard → Web Analytics → Add a site（你的 Cloudflare 账号已有）→ 复制 beacon `<script>` 粘到两页末尾注释处。免费、无 cookie。
-3. **发布**：
+2. **访问统计**：已接 Cloudflare Web Analytics（主机名 dongqi-yang.github.io，账号 Dongqi243@gmail.com），看数：
+   https://dash.cloudflare.com/13f17b29848c472380f8f44428f82a9a/web-analytics
+3. **发布**：已完成，仓库 https://github.com/DongQi-Yang/validation-pages ，Pages 地址
+   https://dongqi-yang.github.io/validation-pages/tracks/ 与 /loud/ 。以后改页面 `git push` 即自动重新发布（约 1 分钟）。原始步骤：
    ```bash
    cd ~/Projects/validation-pages
    git init && git add -A && git commit -m "fake-door pages for tracks + loud"
